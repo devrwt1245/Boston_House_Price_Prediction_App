@@ -1,17 +1,18 @@
-import streamlit as st # API integration
-import pandas as pd # Data cleaning and preprocessing
-import numpy as np # mathemtical computations
-import pickle # Load model file
+import streamlit as st # API integeration
+import pandas as pd # data cleaning and preprocessing
+import numpy as np # mathematical computations
+import pickle # load model file
+
 st.set_page_config(
-    page_title="AI powered House Price Prediction",
-    page_icon= '🏠',
-    layout='wide')
+    page_title = "AI Powered House Price Prediction",
+    page_icon='🏠',
+    layout = 'wide')
 
 st.markdown("""
 <style>
 
 .main{
-background:f5f8ff
+background:#f5f8ff
 }
 
 .stButton>button{
@@ -19,32 +20,30 @@ background:#0099ff;
 color:white;
 border-radius:12px;
 height:50px;
-width:100%
+width:100%;  
 font-size:18px;
 }
-
 
 h1{
 color:#003366
 }
-
 .metric{
 font-size:30px;
 }
-<style>
-""",unsafe_allow_html=True)
+<style> """,unsafe_allow_html=True)
 
-st.title("Boston House Price Prediction powered by AI")
 
-st.write("Here We are doing Prediction of House Price using Machine Learning")
+st.title("Boston House Price Prediction Powered by AI")
 
-model=pickle.load(open('model.pkl','rb'))
+st.write("Here We are doing Prediction of house price using Machine Learning")
 
-columns=pickle.load(open('columns.pkl','rb'))
+model = pickle.load(open('model.pkl','rb'))
 
-data={}
+columns = pickle.load(open('columns.pkl','rb'))
 
-col1,col2,col3=st.columns(3)
+data = {}
+
+col1,col2,col3 = st.columns(3)
 
 for i,col in enumerate(columns):
     if i%3==0:
@@ -58,8 +57,8 @@ for i,col in enumerate(columns):
             data[col]=st.number_input(col,value=0.0)
 
 if st.button("Predict House Price"):
-    df= pd.DataFrame([data])
-    prediction=model.predict(df)[0]
+    df=  pd.DataFrame([data])
+    prediction = model.predict(df)[0]
     st.success(f'Estimated House Price is ${prediction}')
     st.balloons()
 st.divider()
@@ -67,10 +66,10 @@ st.divider()
 st.subheader("Project Highlights")
 
 st.markdown("""
-Linear Regresssion
+Linear Regression
 Feature Engineering
 Data Cleaning
-Outliers Detection
+outliers Detection
 StandardScaler
 MinMaxScaler
 Ridge
